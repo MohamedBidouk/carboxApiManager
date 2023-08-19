@@ -1,0 +1,71 @@
+#sudo nano /etc/hosts
+#sudo nano hosts
+#192.168.1.8     zamzam-local
+
+#ssh ubuntu@51.178.31.176
+
+# sudo docker login registry.gitlab.com
+
+#keycloak :
+
+#  cd  /opt/keycloak/bin
+#  ./kcadm.sh update realms/master -s sslRequired=NONE     --server http://localhost:8080 --realm master --user admin --password admin
+#  ./kcadm.sh update realms/zamzam-microservices-realm -s sslRequired=NONE     --server http://localhost:8080 --realm master --user admin --password admin
+
+#sudo systemctl stop postgresql
+#docker network create --driver overlay  --attachable  my_nw1
+#sudo docker-compose -f docker-compose.yml up -d
+
+#portainer-->https://zamzam-local:9443 
+#service-config-->http://zamzam-local:8011  --> http://zamzam-local:8011/test
+#api-gateway-   ->http://zamzam-local:8080  --> http://zamzam-local:8080/test
+#eureka        -->http://zamzam-local:8761  --> http://zamzam-local:8761/test --> (login=eureka & pwd=password)
+
+#consume-service->http://zamzam-local:8084  -->  http://zamzam-local:8084/test
+#consumer-service->http://zamzam-local:8085  --> http://zamzam-local:8085/api/consumers/test
+
+#mongodb-zamzam->http://zamzam-local:27017
+#depot-service-->http://zamzam-local:8086  --> http://zamzam-local:8086/api/depots/test
+
+
+#zipkin-->http://zamzam-local:9411/zipkin/
+#notification-service-->http://zamzam-local:8087  --> http://zamzam-local:8087/test
+
+#zookeeper-->http://zamzam-local:2181
+#kafka-->http://zamzam-local:9092
+
+#order-service-->http://zamzam-local:8088  --> http://zamzam-local:8088/api/orders/test
+#organization-service-->http://zamzam-local:8089  --> http://zamzam-local:8089/api/organizations/test
+#refrigerator-service-->http://zamzam-local:8090  --> http://zamzam-local:8090/api/refrigerators/test
+#roadmap-service-->http://zamzam-local:8091      -->  http://zamzam-local:8091/api/roadmaps/test
+#------------------------------------------
+#phpmyadmin : http://zamzam-local:8000/
+#keycloak :   http://zamzam-local:8180/
+#pgadmin :    http://zamzam-local:81/browser/
+version: '3.5'
+services:
+  api-gateway:
+    hostname: api-gateway
+    container_name: api-gateway
+    image: sha256:6d703ebdebdcdafddd1f7fa0f53be637a48a4993ef7ce1323df3e3b6448e53b6
+    #environment:
+    #- spring.profiles.active=local
+    #networks:
+      #- my_nw1
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+  portainer:
+    image: 'portainer/portainer-ce:latest'
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    ports:
+      - "9443:9443"
+volumes:
+  portainer_data: {}
+#networks:
+  #my_nw1:
+    #driver: overlay
+    #name: my_nw1
