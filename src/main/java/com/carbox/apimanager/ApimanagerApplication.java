@@ -18,5 +18,9 @@ public class ApimanagerApplication {
     public ResponseEntity<?> getApiManagerStatus(){
         return new ResponseEntity<>("I'm active api manager", HttpStatus.OK);
     }
+    @GetMapping("/facebook")
+    public String redirectToFacebook() {
+        return "redirect:https://www.facebook.com";
+    }
 
 }
