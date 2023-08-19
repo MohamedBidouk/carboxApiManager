@@ -50,8 +50,8 @@ services:
     image: sha256:6d703ebdebdcdafddd1f7fa0f53be637a48a4993ef7ce1323df3e3b6448e53b6
     #environment:
     #- spring.profiles.active=local
-    #networks:
-      #- my_nw1
+    networks:
+      - my_nw1
     ports:
       - "9090:9090"
     restart: unless-stopped
@@ -65,7 +65,7 @@ services:
       - "9443:9443"
 volumes:
   portainer_data: {}
-#networks:
-  #my_nw1:
-    #driver: overlay
-    #name: my_nw1
+networks:
+  my_nw1:
+    driver: overlay
+    name: my_nw1
