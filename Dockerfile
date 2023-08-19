@@ -2,10 +2,8 @@ FROM eclipse-temurin:17-jdk-jammy
 
 WORKDIR /apigateway
 
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:resolve
+COPY target/apimanager-0.0.1-SNAPSHOT.jar app.jar
 
-COPY src ./src
+EXPOSE 8080
 
-CMD ["./mvnw", "spring-boot:run"]
+CMD ["java", "-jar", "app.jar"]
