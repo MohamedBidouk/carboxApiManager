@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk-jammy
+FROM eclipse-temurin:17.0.5_8-jdk-alpine
 
 WORKDIR /apigateway
 

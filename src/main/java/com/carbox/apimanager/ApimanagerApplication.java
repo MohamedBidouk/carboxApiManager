@@ -14,7 +14,7 @@ public class ApimanagerApplication {
     public static void main(String[] args) {
         SpringApplication.run(ApimanagerApplication.class, args);
     }
-    @GetMapping("/Apimanager/status")
+    @GetMapping("/apiManager/status")
     public ResponseEntity<?> getApiManagerStatus(){
         return new ResponseEntity<>("I'm active api manager", HttpStatus.OK);
     }

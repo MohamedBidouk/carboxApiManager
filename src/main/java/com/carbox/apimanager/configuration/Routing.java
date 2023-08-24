@@ -10,9 +10,15 @@ public class Routing {
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder locatorBuilder){
         return locatorBuilder.routes()
-                .route("car",r ->r
-                        .path("/eureka/")
-                        .uri("http://localhost:8761")
+                .route("odoo",r ->r
+                        .path("/odoo/api/**")
+                        .filters(f -> f.rewritePath("/odoo/api/(?<remains>.*)", "/api/${remains}"))
+                        .uri("http://164.132.56.7:8819")
+                )
+                .route("s4b",r ->r
+                        .path("/s4b/api/**")
+                        .filters(f -> f.rewritePath("/s4b/api/(?<remains>.*)", "/api/${remains}"))
+                        .uri("https://solutions4business.net")
                 )
                 .route("discovery-server", r -> r
                         .path("/eureka/web")
